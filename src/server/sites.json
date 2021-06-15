@@ -1,0 +1,177 @@
+[
+  {
+    "name": "LWL-1",
+    "type": "Grab Sample",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-80.057506, 26.843595]
+    }
+  },
+  {
+    "name": "LWL-2",
+    "type": "Grab Sample",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-80.049525, 26.821559]
+    }
+  },
+  {
+    "name": "LWL-4",
+    "type": "Grab Sample",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-80.037939, 26.802273]
+    }
+  },
+  {
+    "name": "LWL-5",
+    "type": "Grab Sample",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-80.046028, 26.781331]
+    }
+  },
+  {
+    "name": "LWL-6",
+    "type": "Grab Sample",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-80.047136, 26.765337]
+    }
+  },
+  {
+    "name": "LWL-7",
+    "type": "Grab Sample",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-80.047087, 26.726742]
+    }
+  },
+  {
+    "name": "LWL-8",
+    "type": "Grab Sample",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-80.044161, 26.686898]
+    }
+  },
+  {
+    "name": "LWL-10",
+    "type": "Grab Sample",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-80.043945, 26.661006]
+    }
+  },
+  {
+    "name": "LWL-11",
+    "type": "Grab Sample",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-80.044650, 26.615192]
+    }
+  },
+  {
+    "name": "LWL-13",
+    "type": "Grab Sample",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-80.046148, 26.584037]
+    }
+  },
+  {
+    "name": "LWL-15",
+    "type": "Grab Sample",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-80.044503, 26.556640]
+    }
+  },
+  {
+    "name": "LWL-16",
+    "type": "Grab Sample",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-80.046403, 26.544850]
+    }
+  },
+  {
+    "name": "LWL-17",
+    "type": "Grab Sample",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-80.052006, 26.539040]
+    }
+  },
+  {
+    "name": "LWL-18",
+    "type": "Grab Sample",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-80.053664, 26.528881]
+    }
+  },
+  {
+    "name": "LWL-19",
+    "dbkey": "39481",
+    "type": "SFWMD Sonde/Autosampler",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-80.044164, 26.615551]
+    }
+  },
+  {
+    "name": "LWL-20A",
+    "dbkey": "39485",
+    "type": "SFWMD Sonde/Autosampler",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-80.047308, 26.676611]
+    }
+  },
+  {
+    "name": "Munyon Island",
+    "dbkey": "Munyon Island",
+    "type": "ERM Salinity Sonde",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-80.044936, 26.810422]
+    }
+  },
+  {
+    "name": "John's Island",
+    "dbkey": "John's Island",
+    "type": "ERM Salinity Sonde",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-80.040887, 26.643564]
+    }
+  },
+  {
+    "name": "S-44",
+    "dbkey": "91602",
+    "type": "SFWMD Control Structure",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-80.080553, 26.817237]
+    }
+  },
+  {
+    "name": "S-155",
+    "dbkey": "91404",
+    "type": "SFWMD Control Structure",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-80.055042, 26.644692]
+    }
+  },
+  {
+    "name": "S-41",
+    "dbkey": "91601",
+    "type": "SFWMD Control Structure",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-80.056806, 26.539120]
+    }
+  }
+]

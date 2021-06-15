@@ -1,0 +1,77 @@
+html, body {
+  height: 100%;
+}
+
+.dropdown > .btn > svg {
+  position: relative;
+  top: -1px;
+  left: 1px;
+}
+
+/* https://stackoverflow.com/questions/35151887/how-to-create-placeholder-while-loading-like-facebook#41900041 */
+@keyframes shimmerBackground {
+  0% {background-position: -468px 0}
+  100% {background-position: 468px 0}
+}
+
+.shimmer {
+  background-image: linear-gradient(111deg,
+    #eee 40%,
+    #ddd 50%,
+    #eee 60%);
+  background-size: 1000px 100%;
+  animation: shimmerBackground 1s linear infinite forwards;
+}
+
+@media (min-width: 768px) {
+  .dropdown-menu {
+    min-width: 600px;
+  }
+}
+
+@media (max-width: 1199px) {
+  #map {
+    height: 60vh;
+  }
+
+  .card {
+    margin-bottom: 1rem;
+  }
+
+  #contributionChart {
+    max-height: 175px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #map {
+    height: 100%;
+  }
+
+  .card-column {
+    max-height: calc(100vh - 104px);
+    min-height: calc(100vh - 104px);
+  }
+
+  .card-column .card {
+    height: calc((100% - 3rem) / 3);
+  }
+
+  .card-column .card:nth-of-type(2) {
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+  }
+}
+
+.mapboxgl-marker {
+  cursor: pointer;
+}
+
+.mapboxgl-popup-content {
+  padding: 0.5rem;
+}
+
+.mapboxgl-popup-content p {
+  margin: 0;
+  padding-right: 1rem;
+}

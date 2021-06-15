@@ -1,0 +1,49 @@
+{
+  "name": "wq-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "webpack --mode development --config webpack.dev.config.js && webpack --mode development --config webpack.server.config.js --watch",
+    "build": "webpack --mode production --config webpack.prod.config.js && webpack --mode production --config webpack.server.config.js",
+    "start": "node ./dist/server.js"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": "14.16.0",
+    "npm": "7.10.0"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.9.2",
+    "axios": "^0.21.1",
+    "bootstrap": "^5.0.0-beta3",
+    "brotli-webpack-plugin": "^1.1.0",
+    "chart.js": "^3.1.1",
+    "chartjs-adapter-date-fns": "^2.0.0",
+    "chartjs-plugin-annotation": "^1.0.0",
+    "csv-parse": "^4.15.4",
+    "date-fns": "^2.21.1",
+    "date-fns-tz": "^1.1.4",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-static-gzip": "^2.1.1",
+    "helmet": "^4.5.0",
+    "http-errors": "^1.8.0",
+    "mapbox-gl": "^2.2.0",
+    "mongoose": "^5.12.5",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "css-loader": "^5.2.4",
+    "css-minimizer-webpack-plugin": "^2.0.0",
+    "html-loader": "^2.1.2",
+    "html-webpack-plugin": "^5.3.1",
+    "mini-css-extract-plugin": "^1.5.0",
+    "nodemon-webpack-plugin": "^4.5.2",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.35.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-middleware": "^4.1.0",
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-node-externals": "^3.0.0"
+  }
+}
