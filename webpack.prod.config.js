@@ -30,6 +30,13 @@ module.exports = {
       {
         test: /\.(png|jpg|gif)$/i,
         type: 'asset/resource'
+      },
+      {
+        test: /\.ico$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: '[name][ext]'
+        }
       }
     ]
   },
@@ -49,7 +56,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/html/index.html',
-      filename: './index.html'
+      filename: './index.html',
+      favicon: './src/img/favicon.ico'
     }),
     new MiniCssExtractPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),

@@ -29,6 +29,13 @@ module.exports = {
       {
         test: /\.(png|jpg|gif)$/i,
         type: 'asset/resource'
+      },
+      {
+        test: /\.ico$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: '[name][ext]'
+        }
       }
     ]
   },
@@ -47,6 +54,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/html/index.html',
       filename: './index.html',
+      favicon: './src/img/favicon.ico',
       excludeChunks: [ 'server' ]
     }),
     new webpack.HotModuleReplacementPlugin(),
