@@ -114,7 +114,7 @@
   {
     "name": "LWL-19",
     "dbkey": "39481",
-    "type": "SFWMD Sonde/Autosampler",
+    "type": "SFWMD Sonde",
     "geometry": {
       "type": "Point",
       "coordinates": [-80.044164, 26.615551]
@@ -123,7 +123,7 @@
   {
     "name": "LWL-20A",
     "dbkey": "39485",
-    "type": "SFWMD Sonde/Autosampler",
+    "type": "SFWMD Sonde",
     "geometry": {
       "type": "Point",
       "coordinates": [-80.047308, 26.676611]
@@ -132,7 +132,7 @@
   {
     "name": "Munyon Island",
     "dbkey": "Munyon Island",
-    "type": "ERM Salinity Sonde",
+    "type": "ERM Sonde",
     "geometry": {
       "type": "Point",
       "coordinates": [-80.044936, 26.810422]
@@ -141,7 +141,7 @@
   {
     "name": "John's Island",
     "dbkey": "John's Island",
-    "type": "ERM Salinity Sonde",
+    "type": "ERM Sonde",
     "geometry": {
       "type": "Point",
       "coordinates": [-80.040887, 26.643564]
@@ -150,7 +150,7 @@
   {
     "name": "S-44",
     "dbkey": "91602",
-    "type": "SFWMD Control Structure",
+    "type": "SFWMD Spillway",
     "geometry": {
       "type": "Point",
       "coordinates": [-80.080553, 26.817237]
@@ -159,7 +159,7 @@
   {
     "name": "S-155",
     "dbkey": "91404",
-    "type": "SFWMD Control Structure",
+    "type": "SFWMD Spillway",
     "geometry": {
       "type": "Point",
       "coordinates": [-80.055042, 26.644692]
@@ -168,7 +168,7 @@
   {
     "name": "S-41",
     "dbkey": "91601",
-    "type": "SFWMD Control Structure",
+    "type": "SFWMD Spillway",
     "geometry": {
       "type": "Point",
       "coordinates": [-80.056806, 26.539120]
