@@ -1,5 +1,5 @@
 import mapboxgl from 'mapbox-gl';
-import colors from './colors';
+import styles from './styles';
 
 export default async function drawMap() {
   mapboxgl.accessToken = MAPBOX_TOKEN;
@@ -28,8 +28,8 @@ export default async function drawMap() {
 
     const options = {};
 
-    if (site.dbkey != undefined && Object.keys(colors).includes(site.dbkey)) {
-      options.color = colors[site.dbkey];
+    if (site.dbkey != undefined && Object.keys(styles).includes(site.dbkey)) {
+      options.color = styles[site.dbkey].borderColor;
     } else {
       options.color = '#ccc';
     }

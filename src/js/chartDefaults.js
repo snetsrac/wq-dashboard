@@ -7,13 +7,13 @@ export default function setDefaults(datasets, dateRange) {
   Chart.defaults.interaction = { mode: 'index', intersect: false };
   Chart.defaults.maintainAspectRatio = false;
 
+  Chart.defaults.datasets.line.borderJoinStyle = 'round'
   Chart.defaults.datasets.line.pointRadius = 0;
 
   Chart.defaults.plugins.title.display = true;
   Chart.defaults.plugins.title.position = 'left',
   Chart.defaults.plugins.title.font.size = 24;
   Chart.defaults.plugins.title.font.weight = 'bold';
-  Chart.defaults.plugins.legend.labels.boxHeight = 0;
   Chart.defaults.plugins.tooltip.callbacks.label = (ctx) => {
     const unit = ctx.dataset.unit.toLowerCase() === 'psu' ? '' : ` ${ctx.dataset.unit}`;
     return ` ${ctx.dataset.label}: ${ctx.formattedValue}${unit}`;

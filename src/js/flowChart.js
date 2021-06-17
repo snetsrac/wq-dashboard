@@ -1,5 +1,5 @@
 import Chart from 'chart.js/auto';
-import colors from './colors';
+import styles from './styles';
 
 export default async function drawFlowChart(data) {
   const config = {
@@ -7,19 +7,19 @@ export default async function drawFlowChart(data) {
     data: {
       datasets: [
         {
-          ...data[91602],
           label: 'S-44 (C-17)',
-          borderColor: colors[91602]
+          ...data[91602],
+          ...styles[91602]
         },
         {
-          ...data[91404],
           label: 'S-155 (C-51)',
-          borderColor: colors[91404]
+          ...data[91404],
+          ...styles[91404]
         },
         {
-          ...data[91601],
           label: 'S-41 (C-16)',
-          borderColor: colors[91601]
+          ...data[91601],
+          ...styles[91601]
         },
       ]
     },

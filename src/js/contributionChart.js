@@ -1,5 +1,5 @@
 import { Chart } from 'chart.js';
-import colors from './colors';
+import styles from './styles';
 
 export default async function drawContributionChart(data) {
   const grandTotal = data[91602].total + data[91404].total + data[91601].total;
@@ -15,9 +15,9 @@ export default async function drawContributionChart(data) {
           data[91601].total,
         ],
         backgroundColor: [
-          colors[91602],
-          colors[91404],
-          colors[91601]
+          styles[91602].borderColor,
+          styles[91404].borderColor,
+          styles[91601].borderColor
         ]
       }]
     },

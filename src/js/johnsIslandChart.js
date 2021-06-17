@@ -1,5 +1,5 @@
 import Chart from 'chart.js/auto';
-import colors from './colors';
+import styles from './styles';
 
 export default async function drawJohnsIslandChart(data) {
   const config = {
@@ -7,15 +7,15 @@ export default async function drawJohnsIslandChart(data) {
     data: {
       datasets: [
         {
-          ...data['John\'s Island'],
           label: 'Salinity',
-          borderColor: colors['John\'s Island'],
+          ...data['John\'s Island'],
+          ...styles['John\'s Island'],
           yAxisID: 'ySalinity'
         },
         {
-          ...data[91404],
           label: 'Flow',
-          borderColor: colors[91404],
+          ...data[91404],
+          ...styles[91404],
           yAxisID: 'yFlow'
         }
       ]
