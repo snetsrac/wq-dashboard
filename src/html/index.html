@@ -9,56 +9,48 @@
 <body>
   <header class="navbar navbar-expand-md navbar-dark sticky-top bg-dark">
     <div class="container-fluid">
-      <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
-        aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle topbar">
+      <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="toggle topbar">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse mt-2 mt-md-0" id="navbarToggler">
         <div class="navbar-brand">Lake Worth Lagoon Water Quality Dashboard</div>
-        <div class="btn-group ms-auto my-2 my-md-0" id="dateRangeButtons"
-          role="group" aria-label="Date range selection button group">
+        <div class="btn-group ms-auto my-2 my-md-0" id="dateRangeButtons" role="group" aria-label="date range selection button group">
 
-          <input type="radio" class="btn-check" name="dateRange" id="dateRangeYTD" value="YTD" autocomplete="off">
+          <input type="radio" class="btn-check" name="dateRange" id="dateRangeYTD" value="YTD" aria-label="year-to-date" autocomplete="off">
           <label class="btn btn-primary border border-white" for="dateRangeYTD">YTD</label>
 
-          <input type="radio" class="btn-check" name="dateRange" id="dateRange1Y" value="1Y" autocomplete="off">
+          <input type="radio" class="btn-check" name="dateRange" id="dateRange1Y" value="1Y" aria-label="one year" autocomplete="off">
           <label class="btn btn-primary border border-white" for="dateRange1Y">1Y</label>
 
-          <input type="radio" class="btn-check" name="dateRange" id="dateRange6M" value="6M" autocomplete="off">
+          <input type="radio" class="btn-check" name="dateRange" id="dateRange6M" value="6M" aria-label="six months" autocomplete="off">
           <label class="btn btn-primary border border-white" for="dateRange6M">6M</label>
 
-          <input type="radio" class="btn-check" name="dateRange" id="dateRange3M" value="3M" autocomplete="off">
+          <input type="radio" class="btn-check" name="dateRange" id="dateRange3M" value="3M" aria-label="three months" autocomplete="off">
           <label class="btn btn-primary border border-white" for="dateRange3M">3M</label>
 
-          <input type="radio" class="btn-check" name="dateRange" id="dateRange1M" value="1M" autocomplete="off" checked>
+          <input type="radio" class="btn-check" name="dateRange" id="dateRange1M" value="1M" aria-label="one month" autocomplete="off" checked>
           <label class="btn btn-primary border border-white" for="dateRange1M">1M</label>
 
-          <input type="radio" class="btn-check" name="dateRange" id="dateRange1W" value="1W" autocomplete="off">
+          <input type="radio" class="btn-check" name="dateRange" id="dateRange1W" value="1W" aria-label="one week" autocomplete="off">
           <label class="btn btn-primary border border-white" for="dateRange1W">1W</label>
 
         </div>
         <div class="dropdown">
-          <div class="btn btn-primary border border-white ms-md-3" type="button" data-bs-toggle="dropdown"
-            data-bs-display="static" aria-expanded="false">
+          <button class="btn btn-primary border border-white ms-md-3" data-bs-toggle="dropdown" data-bs-display="static" aria-contrals="websiteInformation" aria-expanded="false" aria-label="toggle website information">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
               <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
               <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
             </svg>
-          </div>
-          <div class="dropdown-menu dropdown-menu-dark dropdown-menu-md-end p-3">
+          </button>
+          <div class="dropdown-menu dropdown-menu-dark dropdown-menu-md-end p-3" id="websiteInformation">
             <p>
               This dashboard displays surface freshwater input and salinity data for the Lake Worth Lagoon.
             </p>
             <p>
-              Flow data for all sites and salinity data for sites LWL-19 and LWL-20A are provided by the South Florida
-              Water Management District through the
-              <a class="link-info" href="https://www.sfwmd.gov/science-data/dbhydro" target="_blank">
-                DBHYDRO environmental database
-              </a>.
+              Flow data for all sites and salinity data for sites LWL-19 and LWL-20A are provided by the South Florida Water Management District through the <a class="link-info" href="https://www.sfwmd.gov/science-data/dbhydro" target="_blank">DBHYDRO environmental database</a>.
             </p>
             <p class="mb-0">
-              Salinity data for John's Island and Munyon Island are provided by Palm Beach County's Department of
-              Environmental Resources Management.
+              Salinity data for John's Island and Munyon Island are provided by Palm Beach County's Department of Environmental Resources Management.
             </p>
           </div>
         </div>
@@ -72,13 +64,13 @@
       </div>
       <div class="col-xl-6 card-column">
         <div class="card p-3 position-relative">
-          <canvas id="salinityChart"></canvas>
+          <canvas id="salinityChart">Salinity Envelope chart - needs more accessibility</canvas>
         </div>
         <div class="card p-3 position-relative">
-          <canvas id="flowChart"></canvas>
+          <canvas id="flowChart">Canal Flow chart - needs more accessibility</canvas>
         </div>
         <div class="card p-3 position-relative">
-          <canvas id="johnsIslandChart"></canvas>
+          <canvas id="johnsIslandChart">John's Island chart - needs more accessibility</canvas>
         </div>
       </div>
       <div class="col-xl-3 card-column">
@@ -102,36 +94,26 @@
           </div>
         </div>
         <div class="card px-3 py-4 position-relative">
-          <canvas id="contributionChart"></canvas>
+          <canvas id="contributionChart">Relative Input chart - needs more accessibility</canvas>
         </div>
         <div class="card">
           <h5 class="card-header">External Links</h5>
           <div class="card-body overflow-auto">
             <ul class="card-text">
               <li>
-                <a href="https://discover.pbcgov.org/erm/Pages/Lake-Worth-Lagoon-Initiative.aspx" target="_blank">
-                  Lake Worth Lagoon Initiative
-                </a>
+                <a href="https://discover.pbcgov.org/erm/Pages/Lake-Worth-Lagoon-Initiative.aspx" target="_blank">Lake Worth Lagoon Initiative</a>
               </li>
               <li>
-                <a href="https://discover.pbcgov.org/wrtf/Pages/Lake-Worth-Lagoon-Restoration.aspx" target="_blank">
-                  PBC Water Resources Task Force
-                </a>
+                <a href="https://discover.pbcgov.org/wrtf/Pages/Lake-Worth-Lagoon-Restoration.aspx" target="_blank">PBC Water Resources Task Force</a>
               </li>
               <li>
-                <a href="https://www.sfwmd.gov/" target="_blank">
-                  South Florida Water Management District
-                </a>
+                <a href="https://www.sfwmd.gov/" target="_blank">South Florida Water Management District</a>
               </li>
               <li>
-                <a href="https://www.sfwmd.gov/science-data/dbhydro" target="_blank">
-                  DBHYDRO Environmental Database
-                </a>
+                <a href="https://www.sfwmd.gov/science-data/dbhydro" target="_blank">DBHYDRO Environmental Database</a>
               </li>
               <li>
-                <a href="https://lakeworthwaterkeeper.org/" target="_blank">
-                  Lake Worth Waterkeeper
-                </a>
+                <a href="https://lakeworthwaterkeeper.org/" target="_blank">Lake Worth Waterkeeper</a>
               </li>
             </ul>
           </div>
