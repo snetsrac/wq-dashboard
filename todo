@@ -1,4 +1,8 @@
 allow arbitrary date range in front end
-find a nice way to style lines accessibly for color-blindness
-automate ERM sonde data entry
+fix mapboxgl-css after js issue
+consider adding custom map marker icons
+add labels to map markers and pie chart slices
+switch to doughnut chart and add total acre-feet to center
+automate ERM sonde data entry and text updates
 refactor front-end
+improve mobile responsiveness
