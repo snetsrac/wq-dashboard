@@ -1,11 +1,29 @@
+:root {
+  --header-height: 56px;
+}
+
 html, body {
   height: 100%;
+  min-height: 720px;
 }
 
 .dropdown > .btn > svg {
   position: relative;
   top: -1px;
   left: 1px;
+}
+
+.mapboxgl-marker {
+  cursor: pointer;
+}
+
+.mapboxgl-popup-content {
+  padding: 0.5rem;
+}
+
+.mapboxgl-popup-content p {
+  margin: 0;
+  padding-right: 1rem;
 }
 
 /* https://stackoverflow.com/questions/35151887/how-to-create-placeholder-while-loading-like-facebook#41900041 */
@@ -31,26 +49,36 @@ html, body {
 
 @media (max-width: 1199px) {
   #map {
-    height: 60vh;
+    height: calc((100vw - 3rem) / 1.6);
+    max-height: calc(100vh - var(--header-height) - 6rem);
+  }
+
+  .chart-card {
+    height: calc((100vw - 3rem) / 1.6);
+    max-height: calc(100vh - var(--header-height) - 3rem);
   }
 
   .card {
-    margin-bottom: 1rem;
-  }
-
-  #contributionChart {
-    max-height: 175px;
+    margin-bottom: 1.5rem;
   }
 }
 
 @media (min-width: 1200px) {
+  main {
+    height: calc(100vh - var(--header-height) - 3rem);
+    min-height: calc(720px - var(--header-height) - 3rem);
+  }
+
+  main > .row {
+    height: 100%;
+  }
+
   #map {
     height: 100%;
   }
 
   .card-column {
-    max-height: calc(100vh - 104px);
-    min-height: calc(100vh - 104px);
+    height: 100%;
   }
 
   .card-column .card {
@@ -61,17 +89,4 @@ html, body {
     margin-bottom: 1.5rem;
     margin-top: 1.5rem;
   }
-}
-
-.mapboxgl-marker {
-  cursor: pointer;
-}
-
-.mapboxgl-popup-content {
-  padding: 0.5rem;
-}
-
-.mapboxgl-popup-content p {
-  margin: 0;
-  padding-right: 1rem;
 }
