@@ -1,5 +1,4 @@
 allow arbitrary date range in front end
-fix mapboxgl-css after js issue
 consider adding custom map marker icons
 add labels to map markers and pie chart slices
 switch to doughnut chart and add total acre-feet to center

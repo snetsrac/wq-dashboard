@@ -1,15 +1,17 @@
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
+const path = require('path');
 const express = require('express');
+const expressStaticGzip = require('express-static-gzip');
 const createError = require('http-errors');
 const mongoose = require('mongoose');
-const webpack = require('webpack');
-const devMiddleware = require('webpack-dev-middleware');
-const hotMiddleware = require('webpack-hot-middleware');
-const config = require('../../webpack.dev.config.js')
-const compiler = webpack(config);
+const morgan = require('morgan');
 const api = require('./api');
 const helmet = require('./helmet');
 
-mongoose.connect('mongodb://localhost:27017/wq-dashboard', {
+mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: true,
@@ -23,8 +25,16 @@ db.on('open', () => { console.log(`Connected to database: ${db.host}:${db.port}/
 const app = express();
 
 app.use(helmet);
-app.use(devMiddleware(compiler));
-app.use(hotMiddleware(compiler));
+app.use('/static', expressStaticGzip(path.join(__dirname, 'dist'), { enableBrotli: true, index: false }));
+app.use(morgan('combined'));
+
+app.get('/', (req, res, next) => {
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
+});
+
+app.get('/admin', (req, res, next) => {
+  res.sendFile(path.join(__dirname, 'dist/admin.html'));
+});
 
 app.use('/api', api);
 
@@ -46,5 +56,5 @@ app.use((err, req, res, next) => {
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
-  console.log(`Development server listening on ${port}`);
+  console.log(`Production server listening on ${port}`);
 });

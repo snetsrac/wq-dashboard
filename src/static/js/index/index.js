@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../css/main.css';
+import 'mapbox-gl/dist/mapbox-gl.css'
+import '../../css/main.css';
 import { Navbar } from 'bootstrap/dist/js/bootstrap.bundle.js';
 import { add, format, startOfToday, startOfYear } from 'date-fns';
 import drawMap from './map';
@@ -10,20 +11,20 @@ import drawJohnsIslandChart from './johnsIslandChart';
 import drawContributionChart from './contributionChart';
 
 const dateRangeButtons = document.querySelectorAll('#dateRangeButtons > input');
-const chartCards = document.querySelectorAll('.card.position-relative');
-const canvases = document.querySelectorAll('canvas');
+const chartCards = document.querySelectorAll('.chart-card');
+const chartCanvases = document.querySelectorAll('canvas:not(.mapboxgl-canvas)');
 
 const fetchData = async (dateRange) => {
   // turn on loading effects
   dateRangeButtons.forEach((button) => button.setAttribute('disabled', 'disabled'));
-  canvases.forEach((canvas) => canvas.classList.add('invisible'));
+  chartCanvases.forEach((canvas) => canvas.classList.add('invisible'));
   chartCards.forEach((card) => card.classList.add('shimmer'));
 
   const response = await fetch(`/api/data/${dateRange.start}/${dateRange.end}`);
 
   // turn off loading effects
   dateRangeButtons.forEach((button) => button.removeAttribute('disabled'));
-  canvases.forEach((canvas) => canvas.classList.remove('invisible'));
+  chartCanvases.forEach((canvas) => canvas.classList.remove('invisible'));
   chartCards.forEach((card) => card.classList.remove('shimmer'));
 
   let result = null;

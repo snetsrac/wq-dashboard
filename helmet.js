@@ -1,5 +1,11 @@
 const helmet = require('helmet');
 
+const scriptSrc = ["'self'", "blob:"];
+
+if (process.env.NODE_ENV !== 'production') {
+  scriptSrc.push("'unsafe-eval'");
+}
+
 module.exports = helmet({
   contentSecurityPolicy: {
     directives: {
@@ -13,10 +19,7 @@ module.exports = helmet({
         "'self'",
         "data:"
       ],
-      'script-src': [
-        "'self'",
-        "blob:"
-      ]
+      'script-src': scriptSrc
     }
   }
 })

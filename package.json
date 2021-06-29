@@ -3,14 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "webpack --mode development --config webpack.dev.config.js && webpack --mode development --config webpack.server.config.js --watch",
-    "build": "webpack --mode production --config webpack.prod.config.js && webpack --mode production --config webpack.server.config.js",
-    "start": "node ./dist/server.js"
+    "dev": "concurrently \"npm run dev:watch\" \"nodemon app.js --ignore dist/ --ignore src/\"",
+    "dev:watch": "nodemon --watch webpack.common.js --watch webpack.dev.js --exec \"npm run dev:build\"",
+    "dev:build": "webpack --mode development --config webpack.dev.js --watch",
+    "build": "webpack --mode production --config webpack.prod.js",
+    "start": "node app.js"
   },
   "license": "MIT",
   "engines": {
-    "node": "14.16.0",
-    "npm": "7.10.0"
+    "node": "v14.16.0",
+    "npm": "7.12.0"
   },
   "dependencies": {
     "@popperjs/core": "^2.9.2",
@@ -33,17 +35,19 @@
   },
   "devDependencies": {
     "brotli-webpack-plugin": "^1.1.0",
+    "concurrently": "^6.1.0",
     "css-loader": "^5.2.4",
     "css-minimizer-webpack-plugin": "^2.0.0",
     "html-loader": "^2.1.2",
+    "html-webpack-harddisk-plugin": "^2.0.0",
     "html-webpack-plugin": "^5.3.1",
     "mini-css-extract-plugin": "^1.5.0",
     "nodemon-webpack-plugin": "^4.5.2",
     "style-loader": "^2.0.0",
     "webpack": "^5.35.0",
+    "webpack-bundle-analyzer": "^4.4.1",
     "webpack-cli": "^4.6.0",
-    "webpack-dev-middleware": "^4.1.0",
-    "webpack-hot-middleware": "^2.25.0",
+    "webpack-merge": "^5.7.3",
     "webpack-node-externals": "^3.0.0"
   }
 }
