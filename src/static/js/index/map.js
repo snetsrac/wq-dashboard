@@ -1,7 +1,8 @@
-import mapboxgl from 'mapbox-gl';
 import styles from './styles';
 
 export default async function drawMap() {
+  const { default: mapboxgl } = await import('mapbox-gl');
+
   mapboxgl.accessToken = MAPBOX_TOKEN;
 
   const map = new mapboxgl.Map({
