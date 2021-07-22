@@ -6,7 +6,7 @@ const controller = require('../controllers/hydro');
 
 const router = express.Router();
 
-router.get('/:dbkeys', validate('hydro'), routeHandlerAsync(controller.getHydro));
-router.get('/', validate('hydro'), routeHandlerAsync(controller.getHydro));
+router.get('/:dbkeys', validate.getHydro, routeHandlerAsync(controller.getHydro));
+router.get('/', validate.getHydro, routeHandlerAsync(controller.getHydro));
 
 module.exports = router;

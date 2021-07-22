@@ -2,7 +2,40 @@ const createError = require('http-errors');
 const Joi = require('joi');
 const { parseISO, formatISO, isBefore, isFuture, startOfToday, subMonths } = require('date-fns');
 
-const hydroRequest = Joi.object({
+const validateDate = (value, helpers) => {
+  if (value !== undefined && isFuture(parseISO(value))) {
+    return helpers.error('date.inFuture');
+  }
+  
+  return value;
+};
+
+const validateDateQuery = (value, helpers) => {
+  const to = value.to ? parseISO(value.to) : startOfToday();
+  const from = value.from ? parseISO(value.from) : subMonths(to, 1);
+
+  if (isBefore(to, from)) return helpers.error('date.fromBeforeTo');
+
+  value.from = formatISO(from, { representation: 'date' });
+  value.to = formatISO(to, { representation: 'date' });
+  return value;
+};
+
+const dateQuery = Joi.object().keys({
+  from: Joi.string()
+    .isoDate()
+    .custom(validateDate)
+    .messages({ 'date.inFuture': '"From" date must not be in the future'}),
+  to: Joi.string()
+    .isoDate()
+    .custom(validateDate)
+    .messages({ 'date.inFuture': '"To" date must not be in the future' })
+}).custom(validateDateQuery)
+  .messages({
+    'dateQuery.fromBeforeTo': '"To" date must not be earlier than "From" date'
+  });
+
+const hydroGetRequest = Joi.object({
   params: Joi.object({
     dbkeys: Joi.string()
       .pattern(/^(?:\d{1,5}|[A-Za-z][A-Za-z0-9]\d{3})(?:,\d{1,5}|,[A-Za-z][A-Za-z0-9]\d{3})*$/)
@@ -12,71 +45,64 @@ const hydroRequest = Joi.object({
         'string.pattern.base': 'Dbkeys must be a one to five digit number or of the forms A1234 or AB1234; if multiple dbkeys are provided, they must be comma-separated'
       })
   }).required(),
-  query: Joi.object().keys({
-    from: Joi.string().isoDate(),
-    to: Joi.string().isoDate()
-  })
+  query: dateQuery
 });
 
-const ermSondesRequest = Joi.object({
+const ermSondeGetRequest = Joi.object({
   params: Joi.object({
     name: Joi.string()
-      .allow('johns-island', 'munyon-island')
+      .required()
+      .messages({ 'any.required': 'No sonde name was provided' })
+  }).required(),
+  query: dateQuery
+});
+
+const ermSondePostRequest = Joi.object({
+  params: Joi.object({
+    name: Joi.string()
       .required()
       .messages({
         'any.required': 'No sonde name was provided'
       })
   }).required(),
-  query: Joi.object().keys({
-    from: Joi.string().isoDate(),
-    to: Joi.string().isoDate()
-  })
+  body: Joi.object({
+    data: Joi.array().items({
+      date: Joi.string()
+        .isoDate()
+        .required()
+        .custom(validateDate)
+        .messages({
+          'date.isFuture': 'Data must not include entries with dates in the future'
+        }),
+      salinity: Joi.number().allow(null).min(0).required()
+    }).required()
+  }).required()
 });
 
-const validateDates = (query) => {
-  let from = query?.from ? parseISO(query.from) : null;
-  let to = query?.to ? parseISO(query.to) : null;
-
-  let dateError;
-  if (to && isFuture(to)) dateError = '"To" date must not be in the future';
-  if (from && isFuture(from)) dateError = '"From" date must not be in the future';
-  if (from && to && isBefore(to, from)) dateError = '"From" date must not be later than "to" date';
-
-  if (!to) to = startOfToday();
-  if (!from) from = subMonths(to, 1);
-  
-  const normalizedQuery = {
-    from: formatISO(from, { representation: 'date'}),
-    to: formatISO(to, { representation: 'date'})
-  };
-
-  return {
-    dateError,
-    normalizedQuery
-  };
-};
-
-module.exports = (schema) => (req, res, next) => {
+exports.getHydro = (req, res, next) => {
   const { params, query } = req;
-  let error;
 
-  switch (schema) {
-    case 'hydro':
-      error = hydroRequest.validate({ params, query }).error;
-      break;
-    case 'ermSondes':
-      error = ermSondesRequest.validate({ params, query }).error;
-      break;
-    default:
-      throw new Error(`Validation schema ${schema} not recognized.`);
-      break;
-  }
-
+  const { value, error } = hydroGetRequest.validate({ params, query: query || {} });
   if (error) throw createError(400, error.details[0].message);
 
-  const { dateError, normalizedQuery } = validateDates(query);
-  if (dateError) throw createError(400, dateError);
-  req.query = normalizedQuery;
+  req.params = value.params;
+  req.query = value.query;
+  next();
+};
 
+exports.getErmSonde = (req, res, next) => {
+  const { params, query } = req;
+
+  const { value, error } = ermSondeGetRequest.validate({ params, query: query || {} });
+  if (error) {
+    throw createError(400, error.details[0].message);
+  }
+
+  req.params = value.params;
+  req.query = value.query;
+  next();
+};
+
+exports.postErmSonde = (req, res, next) => {
   next();
 };
