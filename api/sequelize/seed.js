@@ -23,7 +23,7 @@ const { site, salinityRecord } = sequelize.models;
   await site.create({ name: 'LWL-19', dbkey: '39481', type: type.SFWMD_SONDE, longitude: -80.044164, latitude: 26.615551 });
   await site.create({ name: 'LWL-20A', dbkey: '39485', type: type.SFWMD_SONDE, longitude: -80.047308, latitude: 26.676611 });
   await site.create({ name: 'John\'s Island', dbkey: 'johns-island', type: type.ERM_SONDE, longitude: -80.040887, latitude: 26.643564 });
-  await site.create({ name: 'Munyon Island', dbkey: 'munyon-island', type: type.ERM_SONDE, longitude: -80.044936, latitude: 26.810422 });
+  await site.create({ name: 'Munyon Island', dbkey: 'munyon-island', type: type.ERM_SONDE, longitude: -80.047560, latitude: 26.821910 });
   await site.create({ name: 'S-44', dbkey: '91602', type: type.SFWMD_GATE, longitude: -80.080553, latitude: 26.817237 });
   await site.create({ name: 'S-155', dbkey: '91404', type: type.SFWMD_GATE, longitude: -80.055042, latitude: 26.644692 });
   await site.create({ name: 'S-41', dbkey: '91601', type: type.SFWMD_GATE, longitude: -80.056806, latitude: 26.539120 });
