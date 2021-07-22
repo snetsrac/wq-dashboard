@@ -1,0 +1,26 @@
+{
+  "name": "api",
+  "private": true,
+  "scripts": {
+    "start": "if [ \"$NODE_ENV\" = \"production\" ]; then\nnode server.js\nelse\nnodemon server.js\nfi",
+    "test": "jest"
+  },
+  "author": "Chris Carstens",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "csv-parse": "^4.16.0",
+    "date-fns": "^2.22.1",
+    "express": "^4.17.1",
+    "helmet": "^4.6.0",
+    "http-errors": "^1.8.0",
+    "joi": "^17.4.0",
+    "morgan": "^1.10.0",
+    "pg": "^8.6.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.6.5"
+  },
+  "devDependencies": {
+    "jest": "^27.0.4",
+    "nodemon": "^2.0.7"
+  }
+}
