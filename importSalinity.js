@@ -6,7 +6,7 @@ const fs = require('fs');
 const readline = require('readline');
 const parse = require('csv-parse/lib/sync');
 const mongoose = require('mongoose');
-const { SalinityRecord } = require('./src/server/models');
+const { SalinityRecord } = require('./models');
 
 const uri = process.env.NODE_ENV === 'production' ? process.env.DATABASE_URL : 'mongodb://localhost:27017/wq-dashboard';
 
@@ -21,8 +21,6 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Connection error:'));
 db.on('open', async () => {
   console.log(`Connected to database: ${db.host}:${db.port}/${db.name}`);
-
-  await SalinityRecord.deleteMany({});
 
   await insertData('./johns.csv', 'John\'s Island');
   await insertData('./munyon.csv', 'Munyon Island');
@@ -49,13 +47,25 @@ async function insertData(filename, siteName) {
   );
 
   for (let i = 0; i < data.length; i++) {
-    const record = new SalinityRecord({
-      date: data[i].Date,
-      site: siteName,
-      salinity: data[i].Salinity
-    });
+    await SalinityRecord.update(
+      {
+        date: data[i].Date,
+        site: siteName,
+      },
+      {
+        date: data[i].Date,
+        site: siteName,
+        salinity: data[i].Salinity
+      },
+      {
+        upsert: true,
+        overwrite: true
+      },
+      (error, rawResponse) => {
+        if (error) throw new Error(error);
+      }
+    );
 
-    await record.save();
     readline.cursorTo(process.stdout, 0);
     process.stdout.write(`Inserted ${i + 1} salinity records for ${siteName}.`);
   }
