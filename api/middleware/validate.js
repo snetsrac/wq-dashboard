@@ -104,5 +104,10 @@ exports.getErmSonde = (req, res, next) => {
 };
 
 exports.postErmSonde = (req, res, next) => {
+  const { params, body } = req;
+
+  const error = ermSondePostRequest.validate({ params, body }).error;
+  if (error) throw createError(400, error.details[0].message);
+
   next();
 };
