@@ -8,8 +8,8 @@ export default async function drawJohnsIslandChart(data) {
       datasets: [
         {
           label: 'Salinity',
-          ...data['John\'s Island'],
-          ...styles['John\'s Island'],
+          ...data['JOHNS'],
+          ...styles['JOHNS'],
           yAxisID: 'ySalinity'
         },
         {

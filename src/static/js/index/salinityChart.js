@@ -4,9 +4,11 @@ import { startOfToday } from 'date-fns';
 import styles from './styles';
 
 const SALINITY_ENVELOPE_LOW = 15;
-const SALINITY_ENVELOPE_HIGH = 25;
+const SALINITY_ENVELOPE_HIGH = 20;
 
 Chart.register( annotationPlugin);
+
+const salinityKeys = ['JOHNS', 'LWL20AS+SA', 'LWL19S+SA', 'LWL19B+SA', 'LWL20AB+SA', 'MUNYON', 'LWL20S', 'LWL20B'];
 
 export default async function drawSalinityChart(data, dateRange) {
   const config = {
@@ -14,24 +16,34 @@ export default async function drawSalinityChart(data, dateRange) {
     data: {
       datasets: [
         {
-          label: 'LWL-19',
-          ...data[39481],
-          ...styles[39481]
-        },
-        {
-          label: 'LWL-20A',
-          ...data[39485],
-          ...styles[39485]
+          label: 'Munyon Island',
+          ...data['MUNYON'],
+          ...styles['MUNYON']
         },
         {
           label: 'John\'s Island',
-          ...data['John\'s Island'],
-          ...styles['John\'s Island']
+          ...data['JOHNS'],
+          ...styles['JOHNS']
         },
         {
-          label: 'Munyon Island',
-          ...data['Munyon Island'],
-          ...styles['Munyon Island']
+          label: 'LWL20 Surface',
+          ...data['LWL20S'],
+          ...styles['LWL20S']
+        },
+        {
+          label: 'LWL20 Bottom',
+          ...data['LWL20B'],
+          ...styles['LWL20B']
+        },
+        {
+          label: 'LWL19 Surface',
+          ...data['LWL19S+SA'],
+          ...styles['LWL19S+SA']
+        },
+        {
+          label: 'LWL19 Bottom',
+          ...data['LWL19B+SA'],
+          ...styles['LWL19B+SA']
         }
       ]
     },

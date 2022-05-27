@@ -1,10 +1,10 @@
 const axios = require('axios');
 const parseCsv = require('csv-parse/lib/sync');
 const { add, format, parse, parseISO, isBefore } = require('date-fns');
-const { SalinityRecord } = require('./models');
+// const { SalinityRecord } = require('./models');
 
 const ISO_DATE_FORMAT = 'yyyy-MM-dd';
-const DBKEYS = [91602, 91404, 91601, 39481, 39485];
+const DBKEYS = [91602, 91404, 91601/*, 39481, 39485*/];
 
 module.exports = async function getData(dateRange) {
   const data = { ...await getDbhydroData(dateRange), ...await getErmData(dateRange) };
@@ -142,33 +142,81 @@ function getTimeQuery(dateRange) {
 }
 
 async function getErmData(dateRange) {
-  return {
-    'John\'s Island': await queryErmData('John\'s Island', dateRange),
-    'Munyon Island': await queryErmData('Munyon Island', dateRange)
-  };
+  // return {
+  //   'John\'s Island': await queryErmData('John\'s Island', dateRange),
+  //   'Munyon Island': await queryErmData('Munyon Island', dateRange)
+  // };
+
+  return await queryErmData(dateRange);
 }
 
-async function queryErmData(site, dateRange) {
-  const result = await SalinityRecord.find(
-    {
-      site: site,
-      date: { $gte: dateRange.start, $lte: dateRange.end }
-    },
-    {
-      date: 1,
-      salinity: 1,
-      _id: 0
-    }
-  )
+const salinityKeys = ['JOHNS', 'LWL20AS+SA', 'LWL19S+SA', 'LWL19B+SA', 'LWL20AB+SA', 'MUNYON', 'LWL20S', 'LWL20B'];
 
-  return {
-    dataType: 'salin',
-    unit: 'PSU',
-    data: result.map((row) => {
-      return {
-        x: format(row.date, ISO_DATE_FORMAT),
-        y: row.salinity
-      }
-    })
-  }
+async function queryErmData(dateRange) {
+  const urlString = `http://maps.co.palm-beach.fl.us/arcgis/rest/services/ERM/SFWMD_Sub_Data/FeatureServer/0/` +
+  `query?f=json&resultOffset=0&resultRecordCount=7500&where=(NAME IN(${salinityKeys.map(key => `'${key}'`).join(', ')})) AND (DATETIME BETWEEN timestamp ` +
+  `'${format(dateRange.start, ISO_DATE_FORMAT)} 00:00:00' AND CURRENT_TIMESTAMP)&orderByFields=DATETIME ASC` +
+  `&outFields=ESRI_OID,VALUE,DATETIME,NAME&returnGeometry=false&spatialRel=esriSpatialRelIntersects`;
+  
+  const url = new URL(urlString.replace(/\+/g, '%2B'));
+
+  console.log(`GET ${url}`);
+
+  const response = await axios({
+    method: 'GET',
+    url: url.toString(),
+    transformResponse: transformEsriData
+  });
+
+  return response.data;
+
+  // const result = await SalinityRecord.find(
+  //   {
+  //     site: site,
+  //     date: { $gte: dateRange.start, $lte: dateRange.end }
+  //   },
+  //   {
+  //     date: 1,
+  //     salinity: 1,
+  //     _id: 0
+  //   }
+  // )
+
+  // const result = [];
+
+  // return {
+  //   dataType: 'salin',
+  //   unit: 'PSU',
+  //   data: result.map((row) => {
+  //     return {
+  //       x: format(row.date, ISO_DATE_FORMAT),
+  //       y: row.salinity
+  //     }
+  //   })
+  // }
+}
+
+function transformEsriData(data) {
+  const result = {};
+
+ JSON.parse(data)['features'].forEach(feature => {
+    if (feature.attributes['VALUE'] < 0) feature.attributes['VALUE'] = null;
+
+    const key = feature.attributes['NAME'];
+
+    if (result[key] === undefined) {
+      result[key] = {
+        dataType: 'salinity',
+        unit: 'PSU',
+        data: []
+      };
+    }
+
+    result[key].data.push({
+      x: format(new Date(feature.attributes['DATETIME']), ISO_DATE_FORMAT),
+      y: feature.attributes['VALUE']?.toFixed(2) || null
+    });
+  });
+
+  return result;
 }

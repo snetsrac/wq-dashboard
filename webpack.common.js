@@ -5,8 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   target: 'web',
   entry: {
-    index: './src/static/js/index/index.js',
-    admin: './src/static/js/admin/index.js'
+    index: './src/static/js/index/index.js'
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -44,12 +43,6 @@ module.exports = {
       filename: 'index.html',
       favicon: './src/static/img/favicon.ico',
       chunks: ['index']
-    }),
-    new HtmlWebpackPlugin({
-      template: './src/views/admin.html',
-      filename: 'admin.html',
-      favicon: './src/static/img/favicon.ico',
-      chunks: ['admin']
     }),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({

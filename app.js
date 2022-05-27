@@ -11,16 +11,16 @@ const morgan = require('morgan');
 const api = require('./api');
 const helmet = require('./helmet');
 
-mongoose.connect(process.env.DATABASE_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: true,
-  useCreateIndex: true
-});
+// mongoose.connect(process.env.DATABASE_URL, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   useFindAndModify: true,
+//   useCreateIndex: true
+// });
 
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'Connection error:'));
-db.on('open', () => { console.log(`Connected to database: ${db.host}:${db.port}/${db.name}`); });
+// const db = mongoose.connection;
+// db.on('error', console.error.bind(console, 'Connection error:'));
+// db.on('open', () => { console.log(`Connected to database: ${db.host}:${db.port}/${db.name}`); });
 
 const app = express();
 
@@ -30,10 +30,6 @@ app.use(morgan('combined'));
 
 app.get('/', (req, res, next) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
-});
-
-app.get('/admin', (req, res, next) => {
-  res.sendFile(path.join(__dirname, 'dist/admin.html'));
 });
 
 app.use('/api', api);

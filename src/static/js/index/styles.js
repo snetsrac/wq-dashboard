@@ -1,31 +1,30 @@
 const styles = {
   91602: {
-    borderColor: '#f44336',
-    borderDash: [10, 10],
+    borderColor: '#00bcd4'
   },
   91404: {
-    borderColor: '#4caf50',
-    borderDash: []
+    borderColor: '#ffaa00'
   },
   91601: {
-    borderColor: '#2196f3',
-    borderDash: [3, 3]
+    borderColor: '#e600a9'
   },
-  39481: {
-    borderColor: '#ff9800',
-    borderDash: []
+  'LWL20S': {
+    borderColor: '#a3ff73'
   },
-  39485: {
-    borderColor: '#9c27b0',
-    borderDash: [15, 3, 3, 3]
+  'LWL20B': {
+    borderColor: '#38a800'
   },
-  'John\'s Island': {
-    borderColor: '#00bcd4',
-    borderDash: [10, 5]
+  'JOHNS': {
+    borderColor: '#0070ff'
   },
-  'Munyon Island': {
-    borderColor: '#fdd835',
-    borderDash: [15, 3, 3, 3, 3, 3]
+  'MUNYON': {
+    borderColor: '#ff0000'
+  },
+  'LWL19S+SA': {
+    borderColor: '#df73ff'
+  },
+  'LWL19B+SA': {
+    borderColor: '#8400a8'
   },
   salinityEnvelope: {
     backgroundColor: '#c8e6c9',

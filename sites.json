@@ -113,7 +113,7 @@
   },
   {
     "name": "LWL-19",
-    "dbkey": "39481",
+    "dbkey": "LWL19B+SA",
     "type": "SFWMD Sonde",
     "geometry": {
       "type": "Point",
@@ -122,7 +122,7 @@
   },
   {
     "name": "LWL-20A",
-    "dbkey": "39485",
+    "dbkey": "LWL20B",
     "type": "SFWMD Sonde",
     "geometry": {
       "type": "Point",
@@ -131,7 +131,7 @@
   },
   {
     "name": "Munyon Island",
-    "dbkey": "Munyon Island",
+    "dbkey": "MUNYON",
     "type": "ERM Sonde",
     "geometry": {
       "type": "Point",
@@ -140,7 +140,7 @@
   },
   {
     "name": "John's Island",
-    "dbkey": "John's Island",
+    "dbkey": "JOHNS",
     "type": "ERM Sonde",
     "geometry": {
       "type": "Point",
